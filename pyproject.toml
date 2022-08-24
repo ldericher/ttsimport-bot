@@ -3,7 +3,7 @@ authors = ["LDericher <40151420+ldericher@users.noreply.github.com>"]
 description = ""
 license = "LICENSE"
 name = "ttsimport-bot"
-version = "0.6"
+version = "0.6.1"
 
 [tool.poetry.dependencies]
 "discord.py" = "^2.0.0"
