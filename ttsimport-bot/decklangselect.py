@@ -1,10 +1,15 @@
+import io
+import logging
+
 import discord
 from discord.ui import Select
-from fftcgtool import Language
+from fftcgtool import FFDecks, Language
+
+_logger = logging.getLogger(__name__)
 
 
 class DeckLangSelect(Select):
-    def __init__(self) -> None:
+    def __init__(self, decks: FFDecks) -> None:
         super().__init__(
             placeholder="Select Deck Language",
             options=[
@@ -41,12 +46,33 @@ class DeckLangSelect(Select):
             ],
         )
 
+        self.__decks = decks
+
     @property
     def language(self) -> Language:
         return Language(self.values[0])
 
     async def callback(self, interaction: discord.Interaction) -> None:
+        requester = f"{interaction.user.name}#{interaction.user.discriminator}"
+        _logger.info(f"… {requester} picked {self.language}!")
+
         await interaction.message.edit(
-            content=f"You chose {self.language}!",
             view=None,
+        )
+
+        msg_files = [
+            discord.File(
+                fp=io.BytesIO(bytes(
+                    deck.get_json(self.language),
+                    "utf-8",
+                )),
+                filename=deck.file_name,
+                description=deck.name,
+            ) for deck in self.__decks
+        ]
+
+        await interaction.response.send_message(
+            content="Here are your deck files!",
+            files=msg_files,
+            ephemeral=True,
         )

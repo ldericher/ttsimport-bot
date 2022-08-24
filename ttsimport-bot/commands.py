@@ -26,7 +26,7 @@ async def decks(
     if len(san_ids) > MAX_DECKS:
         san_ids = san_ids[:MAX_DECKS]
         reply_content += \
-            "To keep things sane, I only looked at the first " + \
+            "To keep things sane, I will only look at the first " + \
             f"{MAX_DECKS} of your deck IDs.\n"
 
         _logger.info(
@@ -38,22 +38,11 @@ async def decks(
             "I found and imported the following decks for you:\n" + \
             "\n".join("• " + deck.name for deck in decks)
 
-        # msg_files = [
-        #     discord.File(
-        #         fp=io.BytesIO(bytes(
-        #             deck.get_json(language),
-        #             "utf-8",
-        #         )),
-        #         filename=deck.file_name,
-        #         description=deck.name,
-        #     ) for deck in decks
-        # ]
-
         _logger.info(f"Waiting for {requester} to pick deck language …")
 
         await ctx.reply(
             content=reply_content,
-            view=View().add_item(DeckLangSelect()),
+            view=View().add_item(DeckLangSelect(decks)),
         )
 
     else:

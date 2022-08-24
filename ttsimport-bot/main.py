@@ -8,10 +8,11 @@ from .ttsbot import TTSBot
 
 def main() -> None:
     load_dotenv()
-    TOKEN = os.getenv("DISCORD_TOKEN")
+    TOKEN = os.getenv("TTSBOT_TOKEN")
 
     fftcgtool.CardDB(
-        "https://code.yavook.de/Yavook.de/fftcgtool-out/raw/branch/master/carddb.zip"
+        "https://code.yavook.de/Yavook.de/fftcgtool-out/"
+        "raw/branch/master/carddb.zip"
     )
 
     bot = TTSBot()
