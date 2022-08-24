@@ -1,5 +1,6 @@
 import logging
 import os
+from random import randrange
 
 from discord.ext import commands
 from discord.ui import View
@@ -34,9 +35,10 @@ async def decks(
         )
 
     if (decks := FFDecks(san_ids)):
+        tone = "" if (tone := randrange(5)) == 0 else f"_tone{tone}"
+
         reply_content += \
-            "I found and imported the following decks for you:\n" + \
-            "\n".join("• " + deck.name for deck in decks)
+            f"I found and imported {len(decks)} decks for you :muscle{tone}:\n"
 
         _logger.info(f"Waiting for {requester} to pick deck language …")
 
@@ -47,8 +49,7 @@ async def decks(
 
     else:
         reply_content += \
-            "Unfortunately, I didn't find any valid decks for your " + \
-            "request :cry:"
+            "Sorry, I've found no decks matching your request :cry:"
 
         await ctx.reply(
             content=reply_content,

@@ -54,7 +54,10 @@ class DeckLangSelect(Select):
 
     async def callback(self, interaction: discord.Interaction) -> None:
         requester = f"{interaction.user.name}#{interaction.user.discriminator}"
-        _logger.info(f"… {requester} picked {self.language}!")
+        _logger.info(
+            f"… {requester} picked {self.language} "
+            f"and receives {len(self.__decks)} decks!"
+        )
 
         await interaction.message.edit(
             view=None,
@@ -71,8 +74,12 @@ class DeckLangSelect(Select):
             ) for deck in self.__decks
         ]
 
+        msg_content = "Here you go! :star_struck:\n\n" + \
+            "Imported decks:\n" + \
+            "\n".join("• " + deck.name for deck in self.__decks)
+
         await interaction.response.send_message(
-            content="Here are your deck files!",
+            content=msg_content,
             files=msg_files,
             ephemeral=True,
         )
