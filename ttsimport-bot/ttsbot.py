@@ -3,7 +3,7 @@ import logging
 import discord
 from discord.ext import commands
 
-from .commands import decks, narf, test
+from .commands import decks
 
 _logger = logging.getLogger(__name__)
 
@@ -18,8 +18,6 @@ class TTSBot(commands.Bot):
             intents=intents,
         )
 
-        self.add_command(test)
-        self.add_command(narf)
         self.add_command(decks)
 
     async def on_ready(self) -> None:
