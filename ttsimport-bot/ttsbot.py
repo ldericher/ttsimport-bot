@@ -1,7 +1,11 @@
+import logging
+
 import discord
 from discord.ext import commands
 
-from .commands import narf, test
+from .commands import decks, narf, test
+
+_logger = logging.getLogger(__name__)
 
 
 class TTSBot(commands.Bot):
@@ -16,6 +20,7 @@ class TTSBot(commands.Bot):
 
         self.add_command(test)
         self.add_command(narf)
+        self.add_command(decks)
 
     async def on_ready(self) -> None:
-        print(f'{self.user.name} has connected to Discord!')
+        _logger.info(f'{self.user.name} has connected to Discord!')
