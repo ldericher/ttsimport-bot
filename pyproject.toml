@@ -2,13 +2,13 @@
 authors = ["LDericher <40151420+ldericher@users.noreply.github.com>"]
 description = ""
 license = "LICENSE"
-name = "ttsimport-discord"
+name = "ttsimport-bot"
 version = "0.6"
 
 [tool.poetry.dependencies]
+"discord.py" = "^2.0.0"
 fftcgtool = {git = "https://github.com/ldericher/fftcgtool.git", branch = "develop"}
 python = "^3.9"
-"discord.py" = "^2.0.0"
 python-dotenv = "^0.20.0"
 
 [tool.poetry.dev-dependencies]

@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "TTSImport Discord Bot",
+            "name": "TTSImport Bot",
             "type": "python",
             "request": "launch",
-            "module": "ttsimport-discord.main",
+            "module": "ttsimport-bot.main",
             "justMyCode": true
         }
     ]
