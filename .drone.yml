@@ -1,0 +1,14 @@
+---
+kind: pipeline
+name: default
+
+steps:
+- name: ttsimport-bot
+  image: plugins/docker
+  settings:
+    repo: ldericher/ttsimport-bot
+    auto_tag: true
+    username:
+      from_secret: DOCKER_USERNAME
+    password:
+      from_secret: DOCKER_PASSWORD
