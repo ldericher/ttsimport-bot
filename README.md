@@ -7,7 +7,7 @@ This provides `fftcgtool` capabilities as a Discord Bot.
 Just run the `main` submodule as a script:
 
 ```bash
-python -m ttsimport-bot.main
+python -m ttsimport_bot.main
 ```
 
 ## Configuration
